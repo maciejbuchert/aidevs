@@ -3,7 +3,6 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 import { ChatPromptTemplate } from "langchain/prompts";
 require('dotenv').config();
 
-const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const chat = new ChatOpenAI();
 
 async function main() {
