@@ -2,6 +2,18 @@ import { auth, getTask, sendTask } from './apiDevs/api';
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { ChatPromptTemplate } from "langchain/prompts";
 require('dotenv').config();
+import { Client } from "langsmith";
+import { LangChainTracer } from "langchain/callbacks";
+
+const client = new Client({
+    apiUrl: process.env.LANGCHAIN_ENDPOINT,
+    apiKey: process.env.LANGCHAIN_API_KEY
+});
+
+const tracer = new LangChainTracer({
+    projectName: process.env.LANGCHAIN_PROJECT,
+    client
+});
 
 const chat = new ChatOpenAI();
 
@@ -41,7 +53,7 @@ async function main() {
         question: task.question,
     });
 
-    const { content } = await chat.call(formattedChatPrompt);
+    const { content } = await chat.call(formattedChatPrompt, { callbacks: [tracer] });
     console.log(content);
 
     const result = sendTask(token, content);
