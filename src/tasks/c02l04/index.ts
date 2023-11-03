@@ -1,34 +1,48 @@
-import { auth, getTask, sendTask } from './apiDevs/api';
+import { auth, getTask, sendTask } from "@/ai-devs";
 import { OpenAIWhisperAudio } from "langchain/document_loaders/fs/openai_whisper_audio";
+import { Callback } from "@/tasks/c02l04/types.dt.ts";
+import { IncomingMessage } from "http";
 const fs = require('fs');
 const https = require('https');
 require('dotenv').config();
 
-async function main() {
-    const token = auth('whisper');
-    if(typeof token === 'boolean') {
+const token = auth('whisper');
+
+token.then(token => {
+    if(typeof token === "boolean") {
         console.error('No token', token);
-        return;
+        process.exit(1);
     }
 
     const task = getTask(token);
-    const fileUrl = task.msg.match(/https?:\/\/[^\s]+/)[0];
+    task.then(task => {
+        if(typeof task === "boolean") {
+            console.error('Issues with task data', task);
+            process.exit(1);
+        }
 
-    saveFile(fileUrl,(filePath: string) => {
-        console.log(filePath);
+        // @ts-ignore
+        const fileUrl = task.msg.match(/https?:\/\/[^\s]+/)[0];
 
-        const loader = new OpenAIWhisperAudio(filePath);
-        const response = loader.load();
+        saveFile(fileUrl,(filePath: string) => {
+            console.log(filePath);
 
-        response.then((docs) => {
-            console.log(docs[0].pageContent);
-            const result = sendTask(token, docs[0].pageContent);
-            console.log(result);
+            const loader = new OpenAIWhisperAudio(filePath);
+            const response = loader.load();
+
+            response.then((docs) => {
+                console.log(docs[0].pageContent);
+
+                const result = sendTask(token, docs[0].pageContent);
+                result.then(result => {
+                    console.log(result);
+                });
+            });
         });
     });
-}
+});
 
-function saveFile(fileUrl: string, callback) {
+function saveFile(fileUrl: string, callback: Callback) {
     const fileName = fileUrl.substring(fileUrl.lastIndexOf('/')+1);
     const filePath = `${__dirname}/files/${fileName}`;
 
@@ -37,7 +51,7 @@ function saveFile(fileUrl: string, callback) {
         const tempFile = fs.createWriteStream(filePath);
         tempFile.on('open', function() {
             console.log(fileUrl);
-            https.get(fileUrl, function(res) {
+            https.get(fileUrl, (res: IncomingMessage) => {
                 res.on('data', function(chunk) {
                     tempFile.write(chunk);
                     console.log('Downloaded', chunk.length);
@@ -51,7 +65,5 @@ function saveFile(fileUrl: string, callback) {
         });
     });
 }
-
-main();
 
 

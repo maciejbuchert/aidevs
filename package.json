@@ -1,23 +1,27 @@
 {
   "name": "aidevs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./src/c01l01.ts"
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "c01l01": "bun src/tasks/c01l01/index.ts",
+    "c01l04-1": "bun src/tasks/c01l04/1.ts",
+    "c01l04-2": "bun src/tasks/c01l04/2.ts",
+    "c01l05": "bun src/tasks/c01l05/index.ts",
+    "c02l02": "bun src/tasks/c02l02/index.ts",
+    "c02l03": "bun src/tasks/c02l03/index.ts",
+    "c02l04": "bun src/tasks/c02l04/index.ts",
+    "c02l05": "bun src/tasks/c02l05/index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "dependencies": {
     "dotenv": "^16.3.1",
-    "langchain": "^0.0.173",
-    "openai": "^4.12.4",
+    "langchain": "^0.0.179",
+    "openai": "^4.14.2",
     "xmlhttprequest": "^1.8.0"
-  },
-  "devDependencies": {
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
   }
 }
