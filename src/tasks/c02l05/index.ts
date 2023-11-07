@@ -1,6 +1,6 @@
 import { auth, getTask, sendTask } from "@/ai-devs";
 import { addUserSchema } from "@/tasks/c02l05/schema.ts";
-require('dotenv').config();
+import 'dotenv/config';
 
 const token = auth('functions');
 

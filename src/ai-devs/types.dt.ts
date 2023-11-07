@@ -8,7 +8,7 @@ export interface AuthResponse {
 export interface TaskResponse {
     code: number,
     msg: string,
-    input: string[],
+    input: string[]|string,
     blog: string[],
     question: string,
     [key: string]: string|number|string[]|number[]|boolean,

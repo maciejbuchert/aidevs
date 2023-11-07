@@ -14,7 +14,8 @@
     "c02l03": "bun src/tasks/c02l03/index.ts",
     "c02l04": "bun src/tasks/c02l04/index.ts",
     "c02l05": "bun src/tasks/c02l05/index.ts",
-    "c03l01": "bun src/tasks/c03l01/index.ts"
+    "c03l01": "bun src/tasks/c03l01/index.ts",
+    "c03l02": "bun src/tasks/c03l02/index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -23,6 +24,7 @@
     "dotenv": "^16.3.1",
     "langchain": "^0.0.179",
     "openai": "^4.14.2",
+    "p-retry": "^6.1.0",
     "xmlhttprequest": "^1.8.0"
   }
 }

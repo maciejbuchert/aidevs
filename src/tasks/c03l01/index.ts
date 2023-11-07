@@ -1,5 +1,5 @@
 import { auth, getTask, sendTask } from "@/ai-devs";
-require('dotenv').config();
+import 'dotenv/config';
 
 const token = auth('rodo');
 

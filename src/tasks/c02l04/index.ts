@@ -2,9 +2,10 @@ import { auth, getTask, sendTask } from "@/ai-devs";
 import { OpenAIWhisperAudio } from "langchain/document_loaders/fs/openai_whisper_audio";
 import { Callback } from "@/tasks/c02l04/types.dt.ts";
 import { IncomingMessage } from "http";
-const fs = require('fs');
-const https = require('https');
-require('dotenv').config();
+import * as fs from 'fs';
+import https from 'https';
+import 'dotenv/config';
+import {printProgress} from "@/helpers/progress.ts";
 
 const token = auth('whisper');
 
@@ -25,14 +26,10 @@ token.then(token => {
         const fileUrl = task.msg.match(/https?:\/\/[^\s]+/)[0];
 
         saveFile(fileUrl,(filePath: string) => {
-            console.log(filePath);
-
             const loader = new OpenAIWhisperAudio(filePath);
             const response = loader.load();
 
             response.then((docs) => {
-                console.log(docs[0].pageContent);
-
                 const result = sendTask(token, docs[0].pageContent);
                 result.then(result => {
                     console.log(result);
@@ -50,13 +47,14 @@ function saveFile(fileUrl: string, callback: Callback) {
         console.log('Directory created');
         const tempFile = fs.createWriteStream(filePath);
         tempFile.on('open', function() {
-            console.log(fileUrl);
             https.get(fileUrl, (res: IncomingMessage) => {
+                const fileSize = Number(res.headers['content-length']);
                 res.on('data', function(chunk) {
                     tempFile.write(chunk);
-                    console.log('Downloaded', chunk.length);
+                    printProgress('Downloaded', Math.round((tempFile.bytesWritten / fileSize) * 100));
                 }).on('end', function() {
                     tempFile.end();
+                    process.stdout.write('\n');
                     console.log('Download Completed');
                     fs.renameSync(tempFile.path, filePath);
                     return callback(filePath);
