@@ -19,8 +19,9 @@ token.then(token => {
             process.exit(1);
         }
 
+        const inputs = task.input as string[];
         let flags: boolean[] = [];
-        task.input.forEach((i: string) => {
+        inputs.forEach((i: string) => {
 
             moderation.call({
                 input: i,

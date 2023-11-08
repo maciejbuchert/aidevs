@@ -11,6 +11,7 @@ export interface TaskResponse {
     input: string[]|string,
     blog: string[],
     question: string,
+    hint: string,
     [key: string]: string|number|string[]|number[]|boolean,
 }
 
