@@ -16,16 +16,19 @@
     "c02l05": "bun src/tasks/c02l05/index.ts",
     "c03l01": "bun src/tasks/c03l01/index.ts",
     "c03l02": "bun src/tasks/c03l02/index.ts",
-    "c03l03": "bun src/tasks/c03l03/index.ts"
+    "c03l03": "bun src/tasks/c03l03/index.ts",
+    "c03l04": "bun src/tasks/c03l04/index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@qdrant/js-client-rest": "^1.6.0",
     "dotenv": "^16.3.1",
     "langchain": "^0.0.179",
     "openai": "^4.14.2",
     "p-retry": "^6.1.0",
+    "qdrant": "^1.3.1",
     "xmlhttprequest": "^1.8.0"
   }
 }
