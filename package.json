@@ -17,7 +17,12 @@
     "c03l01": "bun src/tasks/c03l01/index.ts",
     "c03l02": "bun src/tasks/c03l02/index.ts",
     "c03l03": "bun src/tasks/c03l03/index.ts",
-    "c03l04": "bun src/tasks/c03l04/index.ts"
+    "c03l04": "bun src/tasks/c03l04/index.ts",
+    "c04l01": "bun src/tasks/c04l01/index.ts",
+    "c04l02": "bun src/tasks/c04l02/index.ts",
+    "c04l03": "bun src/tasks/c04l03/index.ts",
+    "c04l04": "bun src/tasks/c04l04/index.ts",
+    "c04l05": "bun src/tasks/c04l05/index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
