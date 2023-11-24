@@ -23,18 +23,22 @@
     "c04l03": "bun src/tasks/c04l03/index.ts",
     "c04l04": "bun src/tasks/c04l04/index.ts",
     "c04l05": "bun src/tasks/c04l05/index.ts",
-    "c05l01": "bun src/tasks/c05l01/index.ts"
+    "c05l01": "bun src/tasks/c05l01/index.ts",
+    "c05l03": "bun src/tasks/c05l03/index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "@qdrant/js-client-rest": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.3.1",
     "langchain": "^0.0.179",
+    "node-html-markdown": "^1.3.0",
     "openai": "^4.14.2",
     "p-retry": "^6.1.0",
     "qdrant": "^1.3.1",
+    "tiktoken": "^1.0.11",
     "xmlhttprequest": "^1.8.0"
   }
 }
